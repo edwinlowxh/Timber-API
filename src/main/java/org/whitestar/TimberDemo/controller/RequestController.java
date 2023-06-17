@@ -53,9 +53,9 @@ public class RequestController {
         requestRepository.deleteById(id);
     }
 
-    @GetMapping(value = "/user", params = {"userId"}, produces = "application/json")
+    @GetMapping(value = "/all", produces = "application/json")
     @ResponseBody
-    public List<Request> getRequests(RequestRepository requestRepository, @RequestParam("userId") String userId){
-        return requestRepository.findByUserId(userId);
+    public List<Request> getRequests(RequestRepository requestRepository){
+        return (List<Request>) requestRepository.findAll();
     }
 }

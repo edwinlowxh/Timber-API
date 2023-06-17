@@ -19,10 +19,10 @@ public class Skill {
     @DynamoDBAttribute
     private String title;
     @DynamoDBAttribute
-    private String category_id;
+    private String categoryId;
 
     public Skill(String title, String category) {
         this.title = title;
-        this.category_id = category_id;
+        this.categoryId = categoryId;
     }
 }
