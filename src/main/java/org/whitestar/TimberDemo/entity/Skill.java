@@ -4,20 +4,20 @@ import lombok.Data;
 
 @Data
 public class Skill {
-    private Long id;
+    private String id;
     private String title;
-    private String category;
+    private String category_id;
 
     public Skill(){}
 
-    public Skill(Long id, String title, String category) {
+    public Skill(String id, String title, String category_id) {
         this.id = id;
         this.title = title;
-        this.category = category;
+        this.category_id = category_id;
     }
 
     public Skill(String title, String category) {
         this.title = title;
-        this.category = category;
+        this.category_id = category_id;
     }
 }

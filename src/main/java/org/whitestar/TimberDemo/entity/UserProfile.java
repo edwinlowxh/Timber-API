@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class UserProfile {
-    private Long id;
+    private String id;
     private String name;
     private Integer age;
     private String email;
@@ -20,7 +20,7 @@ public class UserProfile {
 
     public UserProfile() {}
 
-    public UserProfile(Long id, String name, Integer age, String email, LocalDate dob) {
+    public UserProfile(String id, String name, Integer age, String email, LocalDate dob) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -29,7 +29,7 @@ public class UserProfile {
         this.level = 1;
         this.bounties = 0;
         this.levelExperience = 100;
-        this.currentExperience = 20;
+        this.currentExperience = 0;
     }
 
     public UserProfile(String name, Integer age, String email, LocalDate dob) {
