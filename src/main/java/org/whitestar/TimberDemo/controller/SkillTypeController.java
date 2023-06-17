@@ -8,8 +8,8 @@ import org.whitestar.TimberDemo.entity.Skill;
 import org.whitestar.TimberDemo.entity.SkillType;
 import org.whitestar.TimberDemo.repository.SkillTypeRepository;
 
+import java.util.ArrayList;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 public class SkillTypeController {
