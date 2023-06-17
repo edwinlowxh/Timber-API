@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @EnableScan
 public interface SkillTypeRepository extends CrudRepository<SkillType, String> {
-    Optional<SkillType> findByName(String name);
 }

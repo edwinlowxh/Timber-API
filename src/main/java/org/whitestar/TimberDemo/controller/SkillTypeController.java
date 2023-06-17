@@ -12,20 +12,17 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(path = "/api/skillType")
 public class SkillTypeController {
 
     @Autowired
     SkillTypeRepository skillTypeRepository;
 
-    @GetMapping(value = "/api/skillType/{searchParameter}", produces = "application/json")
+    @GetMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<?> getSkillType(@PathVariable String searchParameter){
+    public ResponseEntity<?> getSkillType(@RequestParam("id") String id){
         Optional<SkillType> skillType;
-        skillType = skillTypeRepository.findByName(searchParameter);
-
-        if (skillType.isEmpty()){
-            skillType = skillTypeRepository.findById(searchParameter);
-        }
+        skillType = skillTypeRepository.findById(id);
 
         SkillType response = this.unwrapOptional(skillType);
 
@@ -34,7 +31,7 @@ public class SkillTypeController {
                 .body(response);
     }
 
-    @PostMapping(value = "/api/skillType/createSkillType", produces = "application/json")
+    @PostMapping(value = "/createSkillType", produces = "application/json")
     @ResponseBody
     public ResponseEntity<?> createSkillType(@RequestBody SkillType skillType){
         try{

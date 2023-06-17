@@ -12,6 +12,7 @@ import org.whitestar.TimberDemo.repository.SkillRepository;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(path = "/api/skill")
 public class SkillController {
 
     @Autowired
@@ -20,15 +21,11 @@ public class SkillController {
     @Autowired
     SkillMapperImpl skillMapperImpl;
 
-    @GetMapping(value = "/api/skill/{searchParameter}", produces = "application/json")
+    @GetMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<?> getSkill(@PathVariable String searchParameter){
+    public ResponseEntity<?> getSkill(@RequestParam("id") String id){
         Optional<Skill> skill;
-        skill = skillRepository.findByName(searchParameter);
-
-        if (skill.isEmpty()){
-            skill = skillRepository.findById(searchParameter);
-        }
+        skill = skillRepository.findById(id);
         Skill response = this.unwrapOptional(skill);
 
         return ResponseEntity
@@ -36,7 +33,7 @@ public class SkillController {
                 .body(response);
     }
 
-    @PostMapping(value = "/api/skill/createSkill", produces = "application/json")
+    @PostMapping(value = "/createSkill", produces = "application/json")
     @ResponseBody
     public ResponseEntity<?> createSkill(@RequestBody SkillDTO skillDTO){
         Skill skill = null;
