@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.whitestar.TimberDemo.dto.DTO.SkillDTO;
-import org.whitestar.TimberDemo.dto.Mapper.SkillMapper;
+import org.whitestar.TimberDemo.dto.Mapper.SkillMapperImpl;
 import org.whitestar.TimberDemo.entity.Skill;
 import org.whitestar.TimberDemo.repository.SkillRepository;
 
@@ -18,7 +18,7 @@ public class SkillController {
     SkillRepository skillRepository;
 
     @Autowired
-    SkillMapper skillMapper;
+    SkillMapperImpl skillMapperImpl;
 
     @GetMapping(value = "/api/skill/{searchParameter}", produces = "application/json")
     @ResponseBody
@@ -41,7 +41,7 @@ public class SkillController {
     public ResponseEntity<?> createSkill(@RequestBody SkillDTO skillDTO){
         Skill skill = null;
         try{
-            skill = skillMapper.skillDTOToSkill(skillDTO);
+            skill = skillMapperImpl.skillDTOToSkill(skillDTO);
 
             if (skill.getSkillType() == null){
                 return ResponseEntity

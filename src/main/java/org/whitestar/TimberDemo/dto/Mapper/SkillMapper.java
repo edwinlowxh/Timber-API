@@ -3,7 +3,6 @@ package org.whitestar.TimberDemo.dto.Mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.whitestar.TimberDemo.dto.DTO.SkillDTO;
 import org.whitestar.TimberDemo.entity.Skill;
 import org.whitestar.TimberDemo.repository.SkillTypeRepository;
@@ -11,7 +10,6 @@ import org.whitestar.TimberDemo.repository.SkillTypeRepository;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring")
-@Component
 public abstract class SkillMapper {
     @Autowired
     SkillTypeRepository skillTypeRepository;
