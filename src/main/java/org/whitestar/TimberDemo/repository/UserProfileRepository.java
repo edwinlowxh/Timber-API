@@ -16,4 +16,5 @@ import java.util.Optional;
 @EnableScan
 public interface UserProfileRepository extends CrudRepository<UserProfile, String> {
     Optional<UserProfile> findById(String id);
+    Iterable<UserProfile> findAll();
 }

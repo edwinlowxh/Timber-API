@@ -27,8 +27,9 @@ public class UserProfileController {
         return userProfileRepository.findById(id);
     }
 
-    //    @GetMapping
-    //    public List<UserProfile> getUsers(UserProfileRepository userProfileRepository){
-    //        return userProfileRepository.getUserProfiles();
-    //    }
+    @GetMapping(value = "/all", produces = "application/json")
+    @ResponseBody
+    public List<UserProfile> getUsers(UserProfileRepository userProfileRepository){
+        return (List<UserProfile>) userProfileRepository.findAll();
+    }
 }
