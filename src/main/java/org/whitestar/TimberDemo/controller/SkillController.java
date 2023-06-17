@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import org.whitestar.TimberDemo.dto.DTO.SkillDTO;
 import org.whitestar.TimberDemo.dto.Mapper.SkillMapperImpl;
 import org.whitestar.TimberDemo.entity.Skill;
+import org.whitestar.TimberDemo.entity.SkillType;
 import org.whitestar.TimberDemo.repository.SkillRepository;
+import org.whitestar.TimberDemo.repository.SkillTypeRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,6 +22,9 @@ public class SkillController {
     SkillRepository skillRepository;
 
     @Autowired
+    SkillTypeRepository skillTypeRepository;
+
+    @Autowired
     SkillMapperImpl skillMapperImpl;
 
     @GetMapping(produces = "application/json")
@@ -27,6 +33,28 @@ public class SkillController {
         Optional<Skill> skill;
         skill = skillRepository.findById(id);
         Skill response = this.unwrapOptional(skill);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
+    @GetMapping(value = "/bySkillType", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> getAllSkillBySkillType(@RequestParam("skillType") String skillTypeId){
+        Optional<List<Skill>> skillList;
+
+        Optional<SkillType> result = skillTypeRepository.findById(skillTypeId);
+
+        if (result.isEmpty()){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Skill Type does not exist.");
+        }
+
+        SkillType skillType = this.unwrapOptional(result);
+        skillList = skillRepository.findAllBySkillType(skillType);
+        List<Skill> response = this.unwrapOptional(skillList);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
