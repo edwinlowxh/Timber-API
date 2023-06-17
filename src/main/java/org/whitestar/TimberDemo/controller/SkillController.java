@@ -1,27 +1,75 @@
 package org.whitestar.TimberDemo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.whitestar.TimberDemo.dto.DTO.SkillDTO;
+import org.whitestar.TimberDemo.dto.Mapper.SkillMapperImpl;
 import org.whitestar.TimberDemo.entity.Skill;
-import org.whitestar.TimberDemo.entity.UserProfile;
 import org.whitestar.TimberDemo.repository.SkillRepository;
-import org.whitestar.TimberDemo.repository.UserProfileRepository;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/skill")
 public class SkillController {
-    private final SkillRepository skillRepository;
 
     @Autowired
-    public SkillController(SkillRepository skillRepository){
-        this.skillRepository = skillRepository;
+    SkillRepository skillRepository;
+
+    @Autowired
+    SkillMapperImpl skillMapperImpl;
+
+    @GetMapping(value = "/api/skill/{searchParameter}", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> getSkill(@PathVariable String searchParameter){
+        Optional<Skill> skill;
+        skill = skillRepository.findByName(searchParameter);
+
+        if (skill.isEmpty()){
+            skill = skillRepository.findById(searchParameter);
+        }
+        Skill response = this.unwrapOptional(skill);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
     }
 
-    @GetMapping(params = {"userId"}, produces = "application/json")
+    @PostMapping(value = "/api/skill/createSkill", produces = "application/json")
     @ResponseBody
-    public Optional<Skill> getSkill(@RequestParam("userId") String user_id){
-        return skillRepository.findById(user_id);
+    public ResponseEntity<?> createSkill(@RequestBody SkillDTO skillDTO){
+        Skill skill = null;
+        try{
+            skill = skillMapperImpl.skillDTOToSkill(skillDTO);
+
+            if (skill.getSkillType() == null){
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body("Unknown Skill Type");
+            }
+        }
+        catch (Exception e){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Check request body");
+        }
+
+        try{
+            skillRepository.save(skill);
+        }
+        catch (Exception e){
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Unable to save to database");
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(skill);
+    }
+
+    <T> T unwrapOptional(Optional<T> optional) {
+        return optional.orElse(null);
     }
 }

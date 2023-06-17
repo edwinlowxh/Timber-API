@@ -2,7 +2,6 @@ package org.whitestar.TimberDemo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.whitestar.TimberDemo.entity.Request;
-import org.whitestar.TimberDemo.entity.SkillTypeEntity;
 import org.whitestar.TimberDemo.repository.RequestRepository;
 
 import java.util.ArrayList;
