@@ -33,13 +33,13 @@ public class RequestController {
     ){}
 
     @PostMapping()
-    public void postRequest(RequestRecord requestRecord){
+    public void postRequest(@RequestBody  RequestRecord requestRecord){
         Request request = new Request(requestRecord.user_id, requestRecord.title, requestRecord.description);
         requestRepository.save(request);
     }
 
     @PutMapping(params = {"id"})
-    public void acceptRequest(@RequestParam("id") String id, RequestRecord requestRecord){
+    public void acceptRequest(@RequestParam("id") String id,@RequestBody RequestRecord requestRecord){
         Request request = new Request(id, requestRecord.user_id, requestRecord.title, requestRecord.description);
         requestRepository.save(request);
     }
