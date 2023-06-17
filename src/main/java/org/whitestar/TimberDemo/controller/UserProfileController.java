@@ -69,6 +69,33 @@ public class UserProfileController {
                 .body(userProfile);
     }
 
+    public UserProfile increaseBounties(UserProfile userProfile, int gain){
+        if (gain <= 0){
+            return userProfile;
+        }
+        userProfile.setBounties(userProfile.getBounties() + gain);
+        return userProfile;
+    }
+
+    public UserProfile increaseExperience(UserProfile userProfile, int gain){
+        if (gain <= 0){
+            return userProfile;
+        }
+
+        int levelExperience = userProfile.getLevelExperience();
+        int level = userProfile.getLevel();
+        int currentExperience = userProfile.getCurrentExperience() + levelExperience * level;
+
+        int newCurrentExperience = currentExperience + gain;
+        int newLevel = (int) Math.floor(newCurrentExperience / levelExperience);
+        newCurrentExperience = currentExperience % levelExperience;
+
+        userProfile.setCurrentExperience(newCurrentExperience);
+        userProfile.setLevel(newLevel);
+
+        return userProfile;
+    }
+
     <T> T unwrapOptional(Optional<T> optional) {
         return optional.orElse(null);
     }
