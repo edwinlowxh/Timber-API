@@ -9,4 +9,5 @@ import java.util.Optional;
 @EnableScan
 public interface SkillTypeRepository extends CrudRepository<SkillTypeEntity, String> {
     Optional<SkillTypeEntity> findById(String id);
+
 }
