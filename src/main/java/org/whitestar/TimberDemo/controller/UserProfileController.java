@@ -1,11 +1,7 @@
 package org.whitestar.TimberDemo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.whitestar.TimberDemo.entity.Request;
-import org.whitestar.TimberDemo.entity.Skill;
 import org.whitestar.TimberDemo.entity.UserProfile;
-import org.whitestar.TimberDemo.entity.User_Skill;
-import org.whitestar.TimberDemo.repository.RequestRepository;
 import org.whitestar.TimberDemo.repository.UserProfileRepository;
 
 import java.util.List;
