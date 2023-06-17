@@ -15,7 +15,7 @@ public class UserSkill {
     private String id;
 
     @DynamoDBAttribute
-    private Long userID;
+    private String userID;
 
     @DynamoDBAttribute
     private Skill skill;
@@ -29,7 +29,7 @@ public class UserSkill {
     @DynamoDBAttribute
     private int currentExperience;
 
-    public UserSkill(Long userID, Skill skill) {
+    public UserSkill(String userID, Skill skill) {
         this.userID = userID;
         this.skill = skill;
         this.level = 1;
