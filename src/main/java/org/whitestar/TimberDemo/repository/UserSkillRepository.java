@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface UserSkillRepository extends CrudRepository<UserSkill, Long> {
     Optional<UserSkill> findById(String id);
     void deleteById(String id);
-    Iterable<UserSkill> findByUserId(String userId);
+    Iterable<UserSkill> findByUserID(String userID);
 }

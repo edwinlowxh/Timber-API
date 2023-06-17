@@ -44,9 +44,9 @@ public class UserSkillController {
 //        userSkillRepository.save(userSkill);
 //    }
 
-    @GetMapping(value = "/user", params = {"userId"}, produces = "application/json")
+    @GetMapping(value = "/user", params = {"userID"}, produces = "application/json")
     @ResponseBody
-    public List<UserSkill> getUserSkills(@RequestParam("id") String userId, UserSkillRepository userSkillRepository){
-        return (List<UserSkill>) userSkillRepository.findByUserId(userId);
+    public List<UserSkill> getUserSkills(@RequestParam("id") String userID, UserSkillRepository userSkillRepository){
+        return (List<UserSkill>) userSkillRepository.findByUserID(userID);
     }
 }
