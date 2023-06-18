@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/userProfile")
-public class UserProfileController {
+public class UserProfileController extends BaseController{
 
     @Autowired
     private  UserProfileRepository userProfileRepository;
@@ -69,6 +69,15 @@ public class UserProfileController {
                 .body(userProfile);
     }
 
+    @DeleteMapping(value = "/delete", params = "id", produces = "application/json")
+    public ResponseEntity<?> deleteUserProfile(@RequestParam("id") String id){
+        userProfileRepository.deleteById(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Deleted");
+    }
+
     public UserProfile increaseBounties(UserProfile userProfile, int gain){
         if (gain <= 0){
             return userProfile;
@@ -94,9 +103,5 @@ public class UserProfileController {
         userProfile.setLevel(newLevel);
 
         return userProfile;
-    }
-
-    <T> T unwrapOptional(Optional<T> optional) {
-        return optional.orElse(null);
     }
 }

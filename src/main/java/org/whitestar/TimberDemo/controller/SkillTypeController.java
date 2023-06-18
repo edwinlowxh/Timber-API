@@ -4,16 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.whitestar.TimberDemo.entity.Skill;
 import org.whitestar.TimberDemo.entity.SkillType;
 import org.whitestar.TimberDemo.repository.SkillTypeRepository;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/skillType")
-public class SkillTypeController {
+public class SkillTypeController extends BaseController{
 
     @Autowired
     SkillTypeRepository skillTypeRepository;
@@ -31,6 +29,14 @@ public class SkillTypeController {
                 .body(response);
     }
 
+    @GetMapping(value = "all", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> getAllSkillType(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(skillTypeRepository.findAll());
+    }
+
     @PostMapping(value = "/createSkillType", produces = "application/json")
     @ResponseBody
     public ResponseEntity<?> createSkillType(@RequestBody SkillType skillType){
@@ -46,9 +52,5 @@ public class SkillTypeController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(skillType);
-    }
-
-    <T> T unwrapOptional(Optional<T> optional) {
-        return optional.orElse(null);
     }
 }
