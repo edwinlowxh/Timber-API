@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/skill")
-public class SkillController {
+public class SkillController extends BaseController{
 
     @Autowired
     SkillRepository skillRepository;
@@ -37,6 +37,14 @@ public class SkillController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(response);
+    }
+
+    @GetMapping(value = "all", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> getAllSkill(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(skillRepository.findAll());
     }
 
     @GetMapping(value = "/bySkillType", produces = "application/json")
@@ -92,9 +100,5 @@ public class SkillController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(skill);
-    }
-
-    <T> T unwrapOptional(Optional<T> optional) {
-        return optional.orElse(null);
     }
 }
