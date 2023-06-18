@@ -32,18 +32,6 @@ public class UserSkillController {
             int currentExperience
     ){}
 
-//    @PostMapping()
-//    public void postUserSkill(@RequestBody UserSkillController.UserSkillRecord userSkillRecord){
-//        UserSkill userSkill = new UserSkill(userSkillRecord.user_id, userSkillRecord.skill_id);
-//        userSkillRepository.save(userSkill);
-//    }
-//
-//    @PutMapping(params = {"id"})
-//    public void updateUserSkill(@RequestParam("id") String id, UserSkillController.UserSkillRecord userSkillRecord){
-//        UserSkill userSkill = new UserSkill(id, userSkillRecord.user_id, userSkillRecord.skill_id);
-//        userSkillRepository.save(userSkill);
-//    }
-
     @GetMapping(value = "/user", params = {"userID"}, produces = "application/json")
     @ResponseBody
     public List<UserSkill> getUserSkills(@RequestParam("id") String userID, UserSkillRepository userSkillRepository){

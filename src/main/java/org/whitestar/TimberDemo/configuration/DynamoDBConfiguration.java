@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import io.micrometer.common.util.StringUtils;
 import lombok.Setter;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,18 +17,17 @@ import org.springframework.context.annotation.Configuration;
         (basePackages = "org.whitestar.TimberDemo.repository")
 @Setter
 public class DynamoDBConfiguration {
-    @Value("${DYNAMO_DB_ENDPOINT}")
-    private String amazonDynamoDBEndpoint;
-    @Value("${DYNAMO_DB_ACCESS_KEY}")
-    private String amazonAWSAccessKey;
-    @Value("${DYNAMO_DB_SECRET_KEY}")
-    private String amazonAWSSecretKey;
+    private DynamoDBConfigurationProperties dynamoDBConfigurationProperties;
+    @Autowired
+    public DynamoDBConfiguration(DynamoDBConfigurationProperties dynamoDBProperties) {
+        this.dynamoDBConfigurationProperties = dynamoDBProperties;
+    }
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
         AmazonDynamoDB amazonDynamoDB
                 = new AmazonDynamoDBClient(amazonAWSCredentials());
-
+        String amazonDynamoDBEndpoint = dynamoDBConfigurationProperties.getEndpoint();
         if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
             amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
         }
@@ -37,6 +37,8 @@ public class DynamoDBConfiguration {
 
     @Bean
     public AWSCredentials amazonAWSCredentials() {
+        String amazonAWSAccessKey = dynamoDBConfigurationProperties.getAccessKey();
+        String amazonAWSSecretKey = dynamoDBConfigurationProperties.getSecretKey();
         return new BasicAWSCredentials(
                 amazonAWSAccessKey, amazonAWSSecretKey);
     }

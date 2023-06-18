@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 5000
 
 spring:
   main:
@@ -9,3 +9,7 @@ spring:
       enabled: true
     livereload:
       enabled: true
+dynamodb:
+  access-key: AKIA3NCPY2JH5T5EDQXH
+  endpoint: https://dynamodb.ap-southeast-2.amazonaws.com
+  secret-key: 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
