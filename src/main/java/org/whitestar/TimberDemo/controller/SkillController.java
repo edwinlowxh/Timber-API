@@ -27,7 +27,7 @@ public class SkillController {
     @Autowired
     SkillMapperImpl skillMapperImpl;
 
-    @GetMapping(produces = "application/json")
+    @GetMapping(produces = "application/json", params = {"id"})
     @ResponseBody
     public ResponseEntity<?> getSkill(@RequestParam("id") String id){
         Optional<Skill> skill;
