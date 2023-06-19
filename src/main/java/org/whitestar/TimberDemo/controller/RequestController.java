@@ -11,12 +11,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/request")
 public class RequestController {
-    private final RequestRepository requestRepository;
-
     @Autowired
-    public RequestController(RequestRepository requestRepository){
-        this.requestRepository = requestRepository;
-    }
+    private RequestRepository requestRepository;
 
     @GetMapping(params = {"id"}, produces = "application/json")
     @ResponseBody
@@ -54,7 +50,7 @@ public class RequestController {
 
     @GetMapping(value = "/all", produces = "application/json")
     @ResponseBody
-    public List<Request> getRequests(RequestRepository requestRepository){
+    public List<Request> getRequests(){
         return (List<Request>) requestRepository.findAll();
     }
 }
