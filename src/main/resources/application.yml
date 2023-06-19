@@ -10,6 +10,6 @@ spring:
     livereload:
       enabled: true
 dynamodb:
-  access-key: AKIA3NCPY2JH5T5EDQXH
+  access-key: AKIA3NCPY2JHR5NFIHNU
   endpoint: https://dynamodb.ap-southeast-2.amazonaws.com
-  secret-key: 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
+  secret-key: rvy7KihDKSVnZB9zmjYiBlnilmL4Sk/jIZg93tKF
