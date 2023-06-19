@@ -10,6 +10,5 @@ import java.util.Optional;
 public interface RequestRepository extends CrudRepository<Request, String> {
     Optional<Request> findById(String id);
     void deleteById(String id);
-    Iterable<Request> findAll();
 }
 
