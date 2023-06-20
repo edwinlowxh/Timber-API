@@ -14,7 +14,7 @@ public abstract class SkillMapper {
     @Autowired
     SkillTypeRepository skillTypeRepository;
 
-    @Mapping(target="skillType", expression = "java(unwrapOptional(skillTypeRepository.findById(skillDTO.getSkillType())))")
+    @Mapping(target="skillType", expression = "java(unwrapOptional(skillTypeRepository.findById(skillDTO.getSkillTypeId())))")
     public abstract Skill skillDTOToSkill(SkillDTO skillDTO);
 
     <T> T unwrapOptional(Optional<T> optional) {
