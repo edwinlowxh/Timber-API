@@ -11,5 +11,5 @@ import lombok.Setter;
 @Setter
 public class SkillDTO {
     String name;
-    String skillType;
+    String skillTypeId;
 }
