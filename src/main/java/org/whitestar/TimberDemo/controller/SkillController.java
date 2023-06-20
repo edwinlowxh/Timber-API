@@ -49,7 +49,7 @@ public class SkillController extends BaseController{
 
     @GetMapping(value = "/bySkillType", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<?> getAllSkillBySkillType(@RequestParam("skillType") String skillTypeId){
+    public ResponseEntity<?> getAllSkillBySkillType(@RequestParam("skillTypeId") String skillTypeId){
         Optional<List<Skill>> skillList;
 
         Optional<SkillType> result = skillTypeRepository.findById(skillTypeId);
