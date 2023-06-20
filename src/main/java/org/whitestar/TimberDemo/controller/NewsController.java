@@ -39,4 +39,12 @@ public class NewsController extends BaseController{
                 .status(HttpStatus.OK)
                 .body(newsRepository.save(news));
     }
+
+    @DeleteMapping(value = "/delete", params = "id", produces = "application/json")
+    public ResponseEntity<?> createNews(@RequestParam String id){
+        newsRepository.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Deleted");
+    }
 }
